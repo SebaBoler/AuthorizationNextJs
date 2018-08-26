@@ -11,7 +11,7 @@ const LOGIN = gql`
     }
 `
 
-const LogininForm = ({ client }) => {
+const LoginForm = ({ client }) => {
   let email, password
 
   return (
@@ -40,7 +40,7 @@ const LogininForm = ({ client }) => {
 
           email.value = password.value = ''
         }}>
-          {error && <p>No user found with that information.</p>}
+          { error }
           <input name='email' placeholder='Email' ref={node => { email = node }} /><br />
           <input name='password' placeholder='Password' ref={node => { password = node }} type='password' /><br />
           <button>Login</button>
@@ -50,4 +50,4 @@ const LogininForm = ({ client }) => {
   )
 }
 
-export default withApollo(LogininForm)
+export default withApollo(LoginForm)

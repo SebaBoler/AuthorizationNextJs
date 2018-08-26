@@ -1,8 +1,7 @@
 import React from 'react'
 import redirect from '../utils/redirect'
 import checkLoggedIn from '../utils/checkLoggedIn'
-
-import LogininForm from '../components/LogininForm'
+import LoginForm from '../components/LoginForm'
 
 export default class Signin extends React.Component {
   static async getInitialProps (context) {
@@ -20,7 +19,7 @@ export default class Signin extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <LogininForm />
+        <LoginForm />
       </React.Fragment>
     )
   }

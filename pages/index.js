@@ -7,10 +7,10 @@ import checkLoggedIn from '../utils/checkLoggedIn'
 export default class Index extends React.Component {
   static async getInitialProps (context, apolloClient) {
     const { loggedInUser } = await checkLoggedIn(context.apolloClient)
-
-    if (!loggedInUser.user) {
-      // If not signed in, send them somewhere more useful
-      redirect(context, '/loginin')
+    // console.log(loggedInUser.me)
+    if (!loggedInUser.me) {
+      // If not signed in then user need login :) 
+      redirect(context, '/login')
     }
 
     return { loggedInUser }
@@ -21,7 +21,7 @@ export default class Index extends React.Component {
       maxAge: -1 // Expire the cookie immediately
     })
     apolloClient.cache.reset().then(() => {
-      redirect({}, '/loginin')
+      redirect({}, '/login')
     })
   }
 
@@ -30,7 +30,7 @@ export default class Index extends React.Component {
       <ApolloConsumer>
         {client => (
           <div>
-            Hello {this.props.loggedInUser.user.name}!<br />
+            Hello {this.props.loggedInUser.me.name}!<br />
             <button onClick={this.signout(client)}>Logout</button>
           </div>
         )}

@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 export default apolloClient => (
   apolloClient.query({
     query: gql`
-      query user {
-        user {
+      query me {
+        me {
           id
           email
           name
@@ -12,6 +12,7 @@ export default apolloClient => (
       }
     `
   }).then(({ data }) => {
+    console.log(data)
     return { loggedInUser: data }
   }).catch(() => {
     // Fail gracefully
