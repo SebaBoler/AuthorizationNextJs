@@ -3,7 +3,7 @@ import redirect from '../utils/redirect'
 import checkLoggedIn from '../utils/checkLoggedIn'
 import LoginForm from '../components/LoginForm'
 
-export default class Signin extends React.Component {
+export default class Login extends React.Component {
   static async getInitialProps (context) {
     const { loggedInUser } = await checkLoggedIn(context.apolloClient)
 

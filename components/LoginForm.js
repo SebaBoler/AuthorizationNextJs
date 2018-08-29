@@ -2,9 +2,10 @@ import { Mutation, withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
 import cookie from 'cookie'
 import redirect from '../utils/redirect'
+import jwt from 'jsonwebtoken'
 
 const LOGIN = gql`
-    mutation login($email: String!, $password: String!) {
+    mutation Login($email: String!, $password: String!) {
         login(email: $email, password: $password) {
             token
         }
@@ -16,12 +17,15 @@ const LoginForm = ({ client }) => {
 
   return (
     <Mutation mutation={LOGIN} onCompleted={(data) => {
-      console.log(data)
+      const tokeInfo = jwt.decode(data.login.token)
+      const ty = 30 * 24 * 60 
       document.cookie = cookie.serialize('token', data.login.token, {
-        maxAge: 30 * 24 * 60 * 60 // 30 days
+          maxAge: ty
+        // maxAge: 30 * 24 * 60 * 60 // 30 days
+        // maxAge: tokenInfo.exp - tokenInfo.iat
       })
       client.cache.reset().then(() => {
-        redirect({}, '/')
+        redirect({}, '/dashboard')
       })
     }} onError={(error) => {
       console.log(error)

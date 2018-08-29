@@ -3,6 +3,7 @@ import cookie from 'cookie'
 import { ApolloConsumer } from 'react-apollo'
 import redirect from '../utils/redirect'
 import checkLoggedIn from '../utils/checkLoggedIn'
+import LayoutMain from '../components/LayoutMain'
 
 export default class Index extends React.Component {
   static async getInitialProps (context, apolloClient) {
@@ -29,10 +30,10 @@ export default class Index extends React.Component {
     return (
       <ApolloConsumer>
         {client => (
-          <div>
+            <div>
             Hello {this.props.loggedInUser.me.name}!<br />
             <button onClick={this.signout(client)}>Logout</button>
-          </div>
+            </div>
         )}
       </ApolloConsumer>
     )
